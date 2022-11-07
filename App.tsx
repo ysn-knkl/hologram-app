@@ -3,6 +3,8 @@ import NavigationContainer from "./app/navigation/Navigation";
 import * as eva from "@eva-design/eva";
 import { ApplicationProvider } from "@ui-kitten/components";
 import { ThemeContext } from "./app/context/theme-context";
+import { store } from "./app/redux/store";
+import { Provider as ReduxProvider } from "react-redux";
 
 type ThemeKey = "light" | "dark";
 
@@ -16,7 +18,9 @@ const App: React.FC = () => {
     <>
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <ApplicationProvider {...eva} theme={eva[theme]}>
-          <NavigationContainer />
+          <ReduxProvider store={store}>
+            <NavigationContainer />
+          </ReduxProvider>
         </ApplicationProvider>
       </ThemeContext.Provider>
     </>

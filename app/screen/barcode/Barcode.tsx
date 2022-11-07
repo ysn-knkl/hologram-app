@@ -1,16 +1,26 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import React from "react";
+import { Text, Layout } from "@ui-kitten/components";
 
-type Props = {}
+type Props = {};
 
 const Barcode = (props: Props) => {
   return (
-    <SafeAreaView>
-      <Text>Barcode</Text>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <Layout style={styles.container}>
+        <Text>Barcode</Text>
+      </Layout>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default Barcode
+export default Barcode;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  safeAreaContainer: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+  },
+});

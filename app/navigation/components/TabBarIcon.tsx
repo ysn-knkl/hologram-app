@@ -8,8 +8,8 @@ interface ITabbarIcon {
 }
 
 const TabbarIcon: React.FC<ITabbarIcon> = ({ focused, routeName }) => {
-  let iconName ="";
-  
+  let iconName = "";
+
   if (routeName === "charts") {
     iconName = focused ? "stats-chart" : "stats-chart-outline";
   } else if (routeName === "cards") {
@@ -26,8 +26,6 @@ const TabbarIcon: React.FC<ITabbarIcon> = ({ focused, routeName }) => {
   );
 };
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
 
 export default TabbarIcon;

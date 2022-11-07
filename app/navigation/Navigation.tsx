@@ -9,6 +9,7 @@ import Cards from "../screen/cards/Cards";
 import Barcode from "../screen/barcode/Barcode";
 import Profile from "../screen/profile/Profile";
 import TabbarIcon from "./components/TabBarIcon";
+import { ROUTES } from "../constant";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,10 +33,10 @@ const TabNavigationContainer = () => {
         },
       })}
     >
-      <Tab.Screen name="charts" component={Charts} />
-      <Tab.Screen name="cards" component={Cards} />
-      <Tab.Screen name="barcode" component={Barcode} />
-      <Tab.Screen name="profile" component={Profile} />
+      <Tab.Screen name={ROUTES.CHARTS} component={Charts} />
+      <Tab.Screen name={ROUTES.CARDS} component={Cards} />
+      <Tab.Screen name={ROUTES.BARCODE} component={Barcode} />
+      <Tab.Screen name={ROUTES.PROFİLE} component={Profile} />
     </Tab.Navigator>
   );
 };

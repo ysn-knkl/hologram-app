@@ -1,77 +1,82 @@
-import { Dimensions, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, SafeAreaView, StyleSheet } from "react-native";
 import React from "react";
 import { PieChart } from "react-native-chart-kit";
+import { Layout } from "@ui-kitten/components";
 
 type Props = {};
 const data = [
   {
     name: "Seoul",
     population: 21500000,
-    color: "rgba(131, 167, 234, 1)",
+    color: "#dd2222",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
   },
   {
     name: "Toronto",
     population: 2800000,
-    color: "#F00",
+    color: "#bbaa33",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
   },
   {
     name: "Beijing",
     population: 527612,
-    color: "red",
+    color: "#ee44bb",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
   },
   {
     name: "New York",
     population: 8538000,
-    color: "#ffffff",
+    color: "#333223",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
   },
   {
     name: "Moscow",
     population: 11920000,
-    color: "rgb(0, 0, 255)",
+    color: "#111333",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
   },
 ];
 
 const chartConfig = {
-  backgroundGradientFrom: "#1E2923",
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "#08130D",
-  backgroundGradientToOpacity: 0.5,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false, // optional
+  useShadowColorFromDataset: false, // optional  
 };
+
 const Charts = (props: Props) => {
   const screenWidth = Dimensions.get("window").width;
 
   return (
-    <SafeAreaView>
-      <Text>Charts</Text>
-      <PieChart
-        data={data}
-        width={screenWidth-30}
-        height={220}
-        chartConfig={chartConfig}
-        accessor={"population"}
-        backgroundColor={"transparent"}
-        paddingLeft={"15"}
-        center={[10, 10]}
-        absolute
-      />
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <Layout style={styles.container}>
+        <PieChart
+          data={data}
+          width={screenWidth}
+          height={250}
+          chartConfig={chartConfig}
+          accessor={"population"}
+          paddingLeft={"10"}
+          center={[0, 0]}
+          avoidFalseZero={false}
+        />
+      </Layout>
     </SafeAreaView>
   );
 };
 
 export default Charts;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  safeAreaContainer: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    alignItems:"center",
+    justifyContent:"center"
+  },
+});
