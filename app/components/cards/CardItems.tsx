@@ -2,6 +2,7 @@ import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Text, Card } from "@ui-kitten/components";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { ThemeContext } from "../../context/theme-context";
 
 export type Product = {
   id: number;
@@ -16,32 +17,27 @@ type Props = {
   onClick: (id: number) => void;
 };
 
-const Header = (props: Props) => {
+const CardItems = (props: Props) => {
   const { image_url, like, id } = props.item;
+  const themeContext = React.useContext(ThemeContext);
   const onClick = props.onClick;
-
   return (
-    <>
+    <Card style={styles.card}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.heartIcon} onPress={() => onClick(id)}>
+          <MaterialCommunityIcons
+            name="heart-multiple"
+            size={25}
+            color={like ? "red" : "gray"}
+          />
+        </TouchableOpacity>
+      </View>
       <Image
         source={{
           uri: image_url,
         }}
-        style={styles.image}
+        style={[styles.image,themeContext.theme === "dark" && {backgroundColor:"#222B45"}]}
       />
-      <TouchableOpacity style={styles.heartIcon} onPress={() => onClick(id)}>
-        <MaterialCommunityIcons
-          name="heart-multiple"
-          size={25}
-          color={like ? "red" : "gray"}
-        />
-      </TouchableOpacity>
-    </>
-  );
-};
-
-const CardItems = (props: Props) => {
-  return (
-    <Card style={styles.card} header={Header(props)}>
       <View style={[styles.footerContainer]}>
         <View>
           <Text style={styles.itemName}>{props.item.name}</Text>
@@ -55,6 +51,10 @@ const CardItems = (props: Props) => {
 export default CardItems;
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection:"row-reverse",
+    width: "100%",
+  },
   card: {
     flex: 1,
     margin: 10,
@@ -65,11 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     resizeMode: "center",
   },
-  heartIcon: {
-    position: "absolute",
-    right: 15,
-    top: 10,
-  },
+  heartIcon: {},
   footerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
