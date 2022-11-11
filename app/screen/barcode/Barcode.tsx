@@ -133,16 +133,20 @@ const Barcode = (props: Props) => {
               })}
           </>
         )}
-        
+
         <Modal
           visible={opneScanner}
           backdropStyle={styles.backdrop}
           onBackdropPress={() => setOpneScanner(false)}
         >
-          <View
-            style={{ height: 400, width: "100%" }}
-          >
+          <View style={{  width: Dimensions.get("window").width,
+                height: Dimensions.get("window").height, }}>
             <Camera
+              style={{
+                width: Dimensions.get("window").width,
+                height: Dimensions.get("window").height,
+             
+              }}
               cameraType={CameraType.Back}
               scanBarcode={true}
               onReadCode={(event: {
