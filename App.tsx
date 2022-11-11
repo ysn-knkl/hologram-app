@@ -5,6 +5,7 @@ import { ApplicationProvider } from "@ui-kitten/components";
 import { ThemeContext } from "./app/context/theme-context";
 import { store } from "./app/redux/store";
 import { Provider as ReduxProvider } from "react-redux";
+import {AlertNotificationRoot} from 'react-native-alert-notification';
 
 type ThemeKey = "light" | "dark";
 
@@ -19,7 +20,9 @@ const App: React.FC = () => {
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <ApplicationProvider {...eva} theme={eva[theme]}>
           <ReduxProvider store={store}>
-            <NavigationContainer />
+            <AlertNotificationRoot>
+              <NavigationContainer />
+            </AlertNotificationRoot>
           </ReduxProvider>
         </ApplicationProvider>
       </ThemeContext.Provider>
