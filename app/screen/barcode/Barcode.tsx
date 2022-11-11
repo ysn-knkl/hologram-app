@@ -37,13 +37,9 @@ const Barcode = (props: Props) => {
   const onBarcodeScan = (qrvalue: React.SetStateAction<string>) => {
     // Called after te successful scanning of QRCode/Barcode
     setQrvalue(qrvalue);
-    handleSend();
-    setOpneScanner(false);
-  };
-
-  const handleSend = () => {
     dispatch(addBarcode(Number(qrvalue)));
     setQrvalue("");
+    setOpneScanner(false);
   };
 
   async function requestCameraPermission() {
@@ -139,13 +135,17 @@ const Barcode = (props: Props) => {
           backdropStyle={styles.backdrop}
           onBackdropPress={() => setOpneScanner(false)}
         >
-          <View style={{  width: Dimensions.get("window").width,
-                height: Dimensions.get("window").height, }}>
+          <View
+            style={{
+              width: Dimensions.get("window").width,
+              height: Dimensions.get("window").height,
+            }}
+          >
+            <Button onPress={() => setOpneScanner(false)}>DISMISS</Button>
             <Camera
               style={{
                 width: Dimensions.get("window").width,
                 height: Dimensions.get("window").height,
-             
               }}
               cameraType={CameraType.Back}
               scanBarcode={true}
