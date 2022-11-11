@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Text,
   Layout,
@@ -34,13 +34,13 @@ const Barcode = (props: Props) => {
 
   const { barcodeList } = useAppSelector((state) => state.barcode);
 
-  const onBarcodeScan = (qrvalue: React.SetStateAction<string>) => {
+  const onBarcodeScan = useCallback((qrvalue: React.SetStateAction<string>) => {
     // Called after te successful scanning of QRCode/Barcode
     setQrvalue(qrvalue);
-    dispatch(addBarcode(Number(qrvalue)));
+    dispatch(addBarcode(qrvalue));
     setQrvalue("");
     setOpneScanner(false);
-  };
+  }, []);
 
   async function requestCameraPermission() {
     try {

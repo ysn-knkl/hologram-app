@@ -17,7 +17,6 @@ export const BarcodeSlice = createSlice({
   initialState,
   reducers: {
     addBarcode: (state, action) => {
-      console.log(action.payload,222123)
       state.barcodeList = [...state.barcodeList,action.payload];
     },
   },
