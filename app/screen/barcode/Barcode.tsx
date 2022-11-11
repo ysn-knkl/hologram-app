@@ -1,7 +1,9 @@
 import {
+  Dimensions,
   PermissionsAndroid,
   Platform,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   TouchableHighlight,
   View,
@@ -105,44 +107,9 @@ const Barcode = (props: Props) => {
         >
           deneme
         </Button>
+
         {opneScanner ? (
-          <>
-            <Camera
-              style={{ width: 300, height: 300 }}
-              cameraType={CameraType.Back}
-              scanBarcode={true}
-              onReadCode={(event: {
-                nativeEvent: {
-                  codeStringValue: React.SetStateAction<string>;
-                };
-              }) => onBarcodeScan(event.nativeEvent.codeStringValue)}
-              showFrame={true} // (default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
-              laserColor={"blue"} // (default red) optional, color of laser in scanner frame
-              frameColor={"red"} // (default white) optional, color of border of scanner frame
-              focusMode={"false"}
-              ratioOverlay={"1:1"}
-              cameraRatioOverlay={undefined}
-              captureButtonImage={undefined}
-              captureButtonImageStyle={{}}
-              cameraFlipImage={undefined}
-              cameraFlipImageStyle={{}}
-              hideControls={undefined}
-              torchOnImage={undefined}
-              torchOffImage={undefined}
-              torchImageStyle={{}}
-              onBottomButtonPressed={function (event: any): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
-            <Button
-              onPress={() => {
-                setOpneScanner(false);
-                setVisible(false);
-              }}
-            >
-              DISMISS
-            </Button>
-          </>
+          <></>
         ) : (
           <View style={styles.container}>
             <Text style={styles.titleText}>
@@ -157,7 +124,51 @@ const Barcode = (props: Props) => {
           </View>
         )}
 
-        {<Text>Added Barcode</Text>}
+        {!opneScanner && (
+          <>
+            <Text>Added Barcode</Text>
+            {barcodeList &&
+              barcodeList.map((i) => {
+                return <Text> {i}</Text>;
+              })}
+          </>
+        )}
+        
+        <Modal
+          visible={opneScanner}
+          backdropStyle={styles.backdrop}
+          onBackdropPress={() => setOpneScanner(false)}
+        >
+          <View
+            style={{ height: 400, width: "100%" }}
+          >
+            <Camera
+              cameraType={CameraType.Back}
+              scanBarcode={true}
+              onReadCode={(event: {
+                nativeEvent: {
+                  codeStringValue: React.SetStateAction<string>;
+                };
+              }) => onBarcodeScan(event.nativeEvent.codeStringValue)}
+              showFrame={true} // (default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
+              laserColor={"blue"} // (default red) optional, color of laser in scanner frame
+              frameColor={"red"} // (default white) optional, color of border of scanner frame
+              focusMode={"false"}
+              cameraRatioOverlay={undefined}
+              captureButtonImage={undefined}
+              captureButtonImageStyle={{}}
+              cameraFlipImage={undefined}
+              cameraFlipImageStyle={{}}
+              hideControls={undefined}
+              torchOnImage={undefined}
+              torchOffImage={undefined}
+              torchImageStyle={{}}
+              onBottomButtonPressed={function (event: any): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
+          </View>
+        </Modal>
       </Layout>
     </SafeAreaView>
   );
