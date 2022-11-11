@@ -12,33 +12,28 @@ import React, { useCallback, useState } from "react";
 import {
   Text,
   Layout,
-  Input,
   Button,
   Modal,
   Card,
+  styled,
 } from "@ui-kitten/components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addBarcode } from "../../redux/features/barcodeSlice";
 import { Camera, CameraType, CameraScreen } from "react-native-camera-kit";
-import CustomAlert from "../../components/CustomAlert";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 type Props = {};
 
 const Barcode = (props: Props) => {
-  const [qrvalue, setQrvalue] = useState("");
   const [opneScanner, setOpneScanner] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [visibleAlert, setVisibleAlert] = useState("");
 
   const dispatch = useAppDispatch();
 
   const { barcodeList } = useAppSelector((state) => state.barcode);
 
-  const onBarcodeScan = useCallback((qrvalue: React.SetStateAction<string>) => {
-    // Called after te successful scanning of QRCode/Barcode
-    setQrvalue(qrvalue);
-    dispatch(addBarcode(qrvalue));
-    setQrvalue("");
+  const onBarcodeScan = useCallback((barcodeValue: string) => {
+    dispatch(addBarcode(barcodeValue));
     setOpneScanner(false);
   }, []);
 
@@ -48,15 +43,12 @@ const Barcode = (props: Props) => {
         PermissionsAndroid.PERMISSIONS.CAMERA
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        // If CAMERA Permission is granted
-        setQrvalue("");
         setOpneScanner(true);
       } else {
         console.log("CAMERA permission denied");
       }
     } catch (err) {
       console.log("Camera permission err", err);
-      console.warn(err);
     }
   }
 
@@ -68,18 +60,16 @@ const Barcode = (props: Props) => {
         await Camera.requestDeviceCameraAuthorization();
 
       if (isCameraAuthorized === true && isUserAuthorizedCamera === true) {
-        setQrvalue("");
         setOpneScanner(true);
       } else {
-        setVisibleAlert("CAMERA permission denied");
+        console.log("CAMERA permission denied");
       }
     } catch (error) {
-      setVisibleAlert("CAMERA permission denied");
+      console.log("CAMERA permission denied");
     }
   }
 
-  const onOpneScanner = async () => {
-    setVisible(true);
+  const onOpneScanner = useCallback(async () => {
     // To Start Scanning
     if (Platform.OS === "android") {
       // Calling the camera permission function
@@ -87,29 +77,15 @@ const Barcode = (props: Props) => {
     } else if (Platform.OS === "ios") {
       requestCameraPermissionIos();
     }
-  };
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <Layout style={styles.layoutContainer}>
-        <CustomAlert
-          visibleAlert={visibleAlert}
-          setVisibleAlert={setVisibleAlert}
-        />
-        <Button
-          onPress={() => {
-            setVisibleAlert("asd");
-          }}
-        >
-          deneme
-        </Button>
-
-        {opneScanner ? (
-          <></>
-        ) : (
+        {!opneScanner && (
           <View style={styles.container}>
-            <Text style={styles.titleText}>
-              Barcode and QR Code Scanner using Camera in React Native
+            <Text style={styles.titleText} category="h3">
+              Please Use This Button for scan a Barcode
             </Text>
             <TouchableHighlight
               onPress={onOpneScanner}
@@ -121,13 +97,38 @@ const Barcode = (props: Props) => {
         )}
 
         {!opneScanner && (
-          <>
-            <Text>Added Barcode</Text>
-            {barcodeList &&
-              barcodeList.map((i) => {
-                return <Text> {i}</Text>;
-              })}
-          </>
+          <View style={styles.barcodeListContainer}>
+            <Text category="h4" style={styles.barcodeListTitle}>
+              Your Barcode List
+            </Text>
+            <ScrollView>
+              {barcodeList.length > 0 ? (
+                barcodeList.map((barcodeItem, index) => (
+                  <Card
+                    style={styles.barcodeListItemContainer}
+                    key={`barcodeListItem-${index}`}
+                  >
+                    <View style={styles.barcodeListItem}>
+                      <Text>
+                        {index + 1} - <Text>{barcodeItem}</Text>
+                      </Text>
+
+                      <Ionicons
+                        style={styles.icon}
+                        name={"barcode-outline"}
+                        size={25}
+                      />
+                    </View>
+                  </Card>
+                ))
+              ) : (
+                <View style={styles.emptyList}>
+                  <AntDesign name="infocirlceo" size={20} color="orange"  style={styles.icon}/>
+                  <Text>Dont have any barcode</Text>
+                </View>
+              )}
+            </ScrollView>
+          </View>
         )}
 
         <Modal
@@ -151,7 +152,7 @@ const Barcode = (props: Props) => {
               scanBarcode={true}
               onReadCode={(event: {
                 nativeEvent: {
-                  codeStringValue: React.SetStateAction<string>;
+                  codeStringValue: string;
                 };
               }) => onBarcodeScan(event.nativeEvent.codeStringValue)}
               showFrame={true} // (default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
@@ -186,26 +187,41 @@ const styles = StyleSheet.create({
   },
   layoutContainer: {
     flex: 1,
-  },
-  inputContainer: {
-    flex: 1,
-    width: "90%",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  input: {
-    marginBottom: 10,
+    paddingHorizontal: 10,
   },
   container: {
     flex: 1,
-    backgroundColor: "white",
-    padding: 10,
+    padding: 1,
     alignItems: "center",
+    justifyContent: "space-evenly",
   },
   titleText: {
-    fontSize: 22,
     textAlign: "center",
-    fontWeight: "bold",
+  },
+  barcodeListContainer: {
+    flex: 3,
+    padding: 5,
+  },
+  barcodeListTitle: {
+    alignSelf: "center",
+    marginVertical: 5,
+  },
+  barcodeListItemContainer: {
+    margin: 5,
+  },
+  barcodeListItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 5,
+  },
+  icon: {
+    marginRight: 10,
+  },
+  emptyList: {
+    marginHorizontal:20,
+    flexDirection: "row",
+    justifyContent:"center"
   },
   textStyle: {
     color: "black",
@@ -225,10 +241,6 @@ const styles = StyleSheet.create({
     padding: 5,
     color: "white",
     textAlign: "center",
-  },
-  textLinkStyle: {
-    color: "blue",
-    paddingVertical: 20,
   },
   backdrop: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
