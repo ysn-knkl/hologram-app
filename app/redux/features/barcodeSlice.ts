@@ -13,10 +13,11 @@ const initialState: BarcodeState = {
 };
 
 export const BarcodeSlice = createSlice({
-  name: "card",
+  name: "barcode",
   initialState,
   reducers: {
     addBarcode: (state, action) => {
+      console.log(action.payload,222123)
       state.barcodeList = [...state.barcodeList,action.payload];
     },
   },
