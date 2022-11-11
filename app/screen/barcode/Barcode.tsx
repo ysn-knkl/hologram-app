@@ -22,6 +22,7 @@ import { addBarcode } from "../../redux/features/barcodeSlice";
 import { Camera, CameraType, CameraScreen } from "react-native-camera-kit";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { ALERT_TYPE, Dialog, Toast } from "react-native-alert-notification";
 
 type Props = {};
 
@@ -45,10 +46,24 @@ const Barcode = (props: Props) => {
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         setOpneScanner(true);
       } else {
-        console.log("CAMERA permission denied");
+        Dialog.show({
+          type: ALERT_TYPE.WARNING,
+          title: "ERROR",
+          textBody: "You Dont Have Camera Access Permission",
+          button: "ok",
+          closeOnOverlayTap: true,
+        });
       }
     } catch (err) {
-      console.log("Camera permission err", err);
+      {
+        Dialog.show({
+          type: ALERT_TYPE.DANGER,
+          title: "ERROR",
+          textBody: "Something Wrong",
+          button: "ok",
+          closeOnOverlayTap: true,
+        });
+      }
     }
   }
 
@@ -123,7 +138,12 @@ const Barcode = (props: Props) => {
                 ))
               ) : (
                 <View style={styles.emptyList}>
-                  <AntDesign name="infocirlceo" size={20} color="orange"  style={styles.icon}/>
+                  <AntDesign
+                    name="infocirlceo"
+                    size={20}
+                    color="orange"
+                    style={styles.icon}
+                  />
                   <Text>Dont have any barcode</Text>
                 </View>
               )}
@@ -219,9 +239,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   emptyList: {
-    marginHorizontal:20,
+    marginHorizontal: 20,
     flexDirection: "row",
-    justifyContent:"center"
+    justifyContent: "center",
   },
   textStyle: {
     color: "black",

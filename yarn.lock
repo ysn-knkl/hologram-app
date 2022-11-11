@@ -5875,6 +5875,11 @@ react-is@^16.13.0, react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-alert-notification@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-alert-notification/-/react-native-alert-notification-0.3.4.tgz#eacd7dd6ff4efcbb6c14cdd3149ce1c60ef2fdcb"
+  integrity sha512-B31sNyJZ9ZdAiaS3Q/2Wo/OqUWNayz0YbdBJ9WKQNGMe2wTds5GgMzU0EX4zrtWjljNyx/sneDqlwwS//NnMgg==
+
 react-native-camera-kit@^13.0.0:
   version "13.0.0"
   resolved "https://registry.yarnpkg.com/react-native-camera-kit/-/react-native-camera-kit-13.0.0.tgz#983d9146cdeb0ec0cb0c0a86b7fa5f7690df08f6"
