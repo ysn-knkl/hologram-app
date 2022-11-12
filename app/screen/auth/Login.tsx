@@ -1,13 +1,13 @@
 import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import React, { useContext, useState } from "react";
 import { Button, Text, Input } from "@ui-kitten/components";
-import { AuthContext } from "../../navigation/AuthProvider";
+import { AppContextInterface, AuthContext } from "../../navigation/AuthProvider";
 
 export default function Login({ navigation }: any) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const { login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext) as AppContextInterface;
 
   const onSignInPressed = () => {
     login(email, password);

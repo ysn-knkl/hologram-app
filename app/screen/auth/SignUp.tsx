@@ -1,7 +1,7 @@
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useContext, useState } from "react";
 
-import { AuthContext } from "../../navigation/AuthProvider";
+import { AppContextInterface, AuthContext } from "../../navigation/AuthProvider";
 import { Input, Button, Text } from "@ui-kitten/components";
 
 export default function SignUp({ navigation }: any) {
@@ -9,7 +9,7 @@ export default function SignUp({ navigation }: any) {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [email, setEmail] = useState("");
 
-  const { register } = useContext(AuthContext);
+  const { register } = useContext(AuthContext) as AppContextInterface;
 
   const onSignUpPressed = () => {
     if (password.toLocaleLowerCase() === passwordConfirm.toLocaleLowerCase()) {

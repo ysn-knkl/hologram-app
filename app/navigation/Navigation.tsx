@@ -12,8 +12,9 @@ import TabbarIcon from "./components/TabBarIcon";
 import { ROUTES } from "../constant";
 import Login from "../screen/auth/Login";
 import SignUp from "../screen/auth/SignUp";
-import { AuthContext } from "./AuthProvider";
+import { AuthContext, AppContextInterface } from "./AuthProvider";
 import { auth } from "../firebase";
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,9 +49,9 @@ const TabNavigationContainer = () => {
 const NavigationContainer: React.FC = () => {
 
   const [initializing, setInitializing] = useState(false);
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext) as AppContextInterface;
 
-  const onAuthStateChanged = (user) => {
+  const onAuthStateChanged = (user:FirebaseAuthTypes.User) => {
     setUser(user);
     if (initializing) setInitializing(false);
   };

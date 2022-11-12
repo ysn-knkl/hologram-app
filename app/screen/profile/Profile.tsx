@@ -2,13 +2,13 @@ import { SafeAreaView, StyleSheet, View } from "react-native";
 import React, { useContext } from "react";
 import { Button, Toggle, Text, Layout } from "@ui-kitten/components";
 import { ThemeContext } from "../../context/theme-context";
-import { AuthContext } from "../../navigation/AuthProvider";
+import { AuthContext, AppContextInterface} from "../../navigation/AuthProvider";
 
 type Props = {};
 
 const Profile = (props: Props) => {
   const themeContext = useContext(ThemeContext);
-  const { logout, user } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext) as AppContextInterface;
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>

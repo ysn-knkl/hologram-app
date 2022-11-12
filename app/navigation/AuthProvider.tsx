@@ -4,11 +4,11 @@ import React, {
   SetStateAction,
   useState,
 } from "react";
-import auth from "@react-native-firebase/auth";
+import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 
-interface AppContextInterface {
-  user: string | null;
-  setUser: Dispatch<SetStateAction<null>>;
+export interface AppContextInterface {
+  user: FirebaseAuthTypes.User | null;
+  setUser: any
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -17,7 +17,7 @@ interface AppContextInterface {
 export const AuthContext = createContext<AppContextInterface | null>(null);
 
 export const AuthProvider = ({ children }: any) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
 
   return (
     <AuthContext.Provider
