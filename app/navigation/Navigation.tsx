@@ -3,13 +3,17 @@ import { NavigationContainer as ReactNavigationContainer } from "@react-navigati
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Charts from "../screen/charts/Charts";
 import Cards from "../screen/cards/Cards";
 import Barcode from "../screen/barcode/Barcode";
 import Profile from "../screen/profile/Profile";
 import TabbarIcon from "./components/TabBarIcon";
 import { ROUTES } from "../constant";
+import Login from "../screen/auth/Login";
+import SignUp from "../screen/auth/SignUp";
+import { AuthContext } from "./AuthProvider";
+import { auth } from "../firebase";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -42,17 +46,32 @@ const TabNavigationContainer = () => {
 };
 
 const NavigationContainer: React.FC = () => {
-  const isLoggedIn = true;
+
+  const [initializing, setInitializing] = useState(false);
+  const { user, setUser } = useContext(AuthContext);
+
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  };
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
 
   return (
     <ReactNavigationContainer>
-      {!isLoggedIn ? (
+      {!user ? (
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
           }}
         >
-          <Stack.Screen name="onboardingRoot" component={Cards} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SignUp" component={SignUp} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator

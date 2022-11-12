@@ -1,12 +1,15 @@
 import { SafeAreaView, StyleSheet, View } from "react-native";
-import React from "react";
-import { Toggle, Text, Layout } from "@ui-kitten/components";
+import React, { useContext } from "react";
+import { Button, Toggle, Text, Layout } from "@ui-kitten/components";
 import { ThemeContext } from "../../context/theme-context";
+import { AuthContext } from "../../navigation/AuthProvider";
 
 type Props = {};
 
 const Profile = (props: Props) => {
-  const themeContext = React.useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
+  const { logout, user } = useContext(AuthContext);
+
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <Layout style={styles.container}>
@@ -17,6 +20,7 @@ const Profile = (props: Props) => {
         >
           {`Theme: ${themeContext.theme}`}
         </Toggle>
+        <Button onPress={() => logout()}>Log out</Button>
       </Layout>
     </SafeAreaView>
   );
