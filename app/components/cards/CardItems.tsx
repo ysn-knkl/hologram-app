@@ -3,14 +3,9 @@ import React from "react";
 import { Text, Card } from "@ui-kitten/components";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { ThemeContext } from "../../context/theme-context";
+import { Product } from "../../redux/models/modals";
 
-export type Product = {
-  id: number;
-  name: string;
-  image_url: string;
-  price: string;
-  like: boolean;
-};
+MaterialCommunityIcons.loadFont()
 
 type Props = {
   item: Product;

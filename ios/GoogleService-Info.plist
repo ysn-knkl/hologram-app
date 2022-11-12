@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>273419235336-tct3atq5j9hqsv04jp03lam03tvmfcrn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.273419235336-tct3atq5j9hqsv04jp03lam03tvmfcrn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAPAmNNmrYao8o4dZaL-wxXgsX_Jq0E9GM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>273419235336</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.hologramApp</string>
+	<key>PROJECT_ID</key>
+	<string>hologram-80daa</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hologram-80daa.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:273419235336:ios:8773d5011849f8551e61bd</string>
+</dict>
+</plist>

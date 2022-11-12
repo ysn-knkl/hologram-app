@@ -1,35 +1,42 @@
 import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
-import React, { useCallback } from "react";
-import { Layout } from "@ui-kitten/components";
+import React, { useCallback, useEffect } from "react";
+import { Button, Layout } from "@ui-kitten/components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import CardItems, { Product } from "../../components/cards/CardItems";
-import { likeProduct } from "../../redux/features/cardSlice";
+import CardItems from "../../components/cards/CardItems";
+import { addProduct, likeProduct } from "../../redux/features/cardSlice";
+import * as firebase from "../../firebase";
+import { Product } from "../../redux/models/modals";
 
-type Props = {};
 
-const Cards = (props: Props) => {
+const Cards = () => {
   const { productList } = useAppSelector((state) => state.card);
   const dispatch = useAppDispatch();
 
   const onClick = useCallback(
     (id: number) => {
-      const unchangedItems = productList.filter(
-        (item: Product) => item.id !== id
-      );
-      const manupulatedItems = productList.find(
-        (item: Product) => item.id === id
-      );
-      if (!manupulatedItems) return;
-
-      const newItem = {
-        ...manupulatedItems,
-        like: !manupulatedItems?.like,
-      };
-      const newList = [...unchangedItems, newItem].sort((a, b) => a.id - b.id);
-      dispatch(likeProduct(newList));
+      dispatch(likeProduct(id));
     },
     [productList]
   );
+
+  useEffect(() => {
+    const db = firebase.firestore();
+    let unsubscribe: any = null;
+    if (productList.length === 0) {
+      unsubscribe = db.collection("products").onSnapshot((snapshot) => {
+        let newCardData: any[] = [];
+        snapshot.docs.map((doc, i) => {
+          const obj = {
+            id: i,
+            ...doc.data(),
+          };
+          newCardData.push(obj);
+        });
+        dispatch(addProduct(newCardData));
+      });
+    }
+    return () => unsubscribe && unsubscribe();
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
