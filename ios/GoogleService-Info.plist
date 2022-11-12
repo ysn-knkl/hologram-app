@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>997303888853-bsonq8ti5lo64o9o3eapaccb9et0hdas.apps.googleusercontent.com</string>
+	<string>273419235336-tct3atq5j9hqsv04jp03lam03tvmfcrn.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.997303888853-bsonq8ti5lo64o9o3eapaccb9et0hdas</string>
+	<string>com.googleusercontent.apps.273419235336-tct3atq5j9hqsv04jp03lam03tvmfcrn</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC5mbseJY0v3KCfR-wQjiFxnWWoxNoH-y8</string>
+	<string>AIzaSyAPAmNNmrYao8o4dZaL-wxXgsX_Jq0E9GM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>997303888853</string>
+	<string>273419235336</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>org.reactjs.native.example.hologramApp</string>
 	<key>PROJECT_ID</key>
-	<string>hologramapp-c532a</string>
+	<string>hologram-80daa</string>
 	<key>STORAGE_BUCKET</key>
-	<string>hologramapp-c532a.appspot.com</string>
+	<string>hologram-80daa.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:997303888853:ios:276801c0da683695446b5c</string>
+	<string>1:273419235336:ios:8773d5011849f8551e61bd</string>
 </dict>
 </plist>

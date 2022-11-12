@@ -1,9 +1,15 @@
 import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import React, { useContext, useState } from "react";
 import { Button, Text, Input } from "@ui-kitten/components";
-import { AppContextInterface, AuthContext } from "../../navigation/AuthProvider";
+import {
+  AppContextInterface,
+  AuthContext,
+} from "../../navigation/AuthProvider";
+import { ScreenProps } from "../../redux/models/modals";
 
-export default function Login({ navigation }: any) {
+export default function Login(Props: ScreenProps) {
+  const { navigation } = Props;
+
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 

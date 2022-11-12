@@ -11,7 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		28398F84291FB8B500C84A28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28398F83291FB8B500C84A28 /* GoogleService-Info.plist */; };
+		286DC62F292030E800F00FCB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 286DC62E292030E800F00FCB /* GoogleService-Info.plist */; };
 		28C16FC529191609009264AD /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 28C16FC429191609009264AD /* Fonts */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8553C1D2A0CBE90E5457A044 /* Pods_hologramApp_hologramAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714790BD1DF091A679806E16 /* Pods_hologramApp_hologramAppTests.framework */; };
@@ -39,7 +39,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hologramApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hologramApp/main.m; sourceTree = "<group>"; };
 		13B5C7B2069116819D9CFBCD /* Pods-hologramApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hologramApp.release.xcconfig"; path = "Target Support Files/Pods-hologramApp/Pods-hologramApp.release.xcconfig"; sourceTree = "<group>"; };
-		28398F83291FB8B500C84A28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		286DC62E292030E800F00FCB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28C16FC429191609009264AD /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		32A68A27D3C8D484CE3D85DD /* Pods_hologramApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hologramApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		714790BD1DF091A679806E16 /* Pods_hologramApp_hologramAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hologramApp_hologramAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,8 +90,8 @@
 		13B07FAE1A68108700A75B9A /* hologramApp */ = {
 			isa = PBXGroup;
 			children = (
+				286DC62E292030E800F00FCB /* GoogleService-Info.plist */,
 				28C16FC429191609009264AD /* Fonts */,
-				28398F83291FB8B500C84A28 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -248,7 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28C16FC529191609009264AD /* Fonts in Resources */,
-				28398F84291FB8B500C84A28 /* GoogleService-Info.plist in Resources */,
+				286DC62F292030E800F00FCB /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

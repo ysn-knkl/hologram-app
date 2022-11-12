@@ -10,9 +10,6 @@ import { AuthProvider } from "./app/navigation/AuthProvider";
 import { firestore } from "./app/firebase";
 import '@react-native-firebase/app';
 
-if (__DEV__) {
-  firestore().useEmulator('localhost', 8080);
-}
 
 type ThemeKey = "light" | "dark";
 

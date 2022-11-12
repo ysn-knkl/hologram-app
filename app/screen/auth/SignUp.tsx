@@ -3,8 +3,10 @@ import React, { useContext, useState } from "react";
 
 import { AppContextInterface, AuthContext } from "../../navigation/AuthProvider";
 import { Input, Button, Text } from "@ui-kitten/components";
+import { ScreenProps } from "../../redux/models/modals";
 
-export default function SignUp({ navigation }: any) {
+export default function SignUp(Props: ScreenProps) {
+  const {navigation} = Props
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [email, setEmail] = useState("");

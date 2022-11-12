@@ -47,11 +47,10 @@ const TabNavigationContainer = () => {
 };
 
 const NavigationContainer: React.FC = () => {
-
   const [initializing, setInitializing] = useState(false);
   const { user, setUser } = useContext(AuthContext) as AppContextInterface;
 
-  const onAuthStateChanged = (user:FirebaseAuthTypes.User) => {
+  const onAuthStateChanged = (user: FirebaseAuthTypes.User) => {
     setUser(user);
     if (initializing) setInitializing(false);
   };
@@ -67,6 +66,7 @@ const NavigationContainer: React.FC = () => {
     <ReactNavigationContainer>
       {!user ? (
         <Stack.Navigator
+          initialRouteName="Login"
           screenOptions={{
             headerShown: false,
           }}

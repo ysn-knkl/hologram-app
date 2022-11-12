@@ -3,7 +3,6 @@ import React from "react";
 import { PieChart } from "react-native-chart-kit";
 import { Layout } from "@ui-kitten/components";
 
-type Props = {};
 const data = [
   {
     name: "Seoul",
@@ -47,7 +46,7 @@ const chartConfig = {
   useShadowColorFromDataset: false, // optional  
 };
 
-const Charts = (props: Props) => {
+const Charts = () => {
   const screenWidth = Dimensions.get("window").width;
 
   return (
@@ -55,6 +54,7 @@ const Charts = (props: Props) => {
       <Layout style={styles.container}>
         <PieChart
           data={data}
+          backgroundColor="transparent"
           width={screenWidth}
           height={250}
           chartConfig={chartConfig}
