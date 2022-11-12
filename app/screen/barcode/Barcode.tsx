@@ -23,6 +23,8 @@ import { Camera, CameraType, CameraScreen } from "react-native-camera-kit";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ALERT_TYPE, Dialog, Toast } from "react-native-alert-notification";
+Ionicons.loadFont()
+AntDesign.loadFont()
 
 type Props = {};
 

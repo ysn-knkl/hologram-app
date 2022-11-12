@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "997303888853",
+    "project_id": "hologramapp-c532a",
+    "storage_bucket": "hologramapp-c532a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997303888853:android:125d4c2840af12e0446b5c",
+        "android_client_info": {
+          "package_name": "com.hologramapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997303888853-5tkdv6obq5kqlesah79jra71r7gihquo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCElWzaZtLjFKHike7r4aG1vqQbvSu9XVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997303888853-5tkdv6obq5kqlesah79jra71r7gihquo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "997303888853-bsonq8ti5lo64o9o3eapaccb9et0hdas.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.hologramApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

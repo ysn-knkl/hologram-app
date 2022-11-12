@@ -2,6 +2,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Modal, Button, Text, Card } from "@ui-kitten/components";
 import AntDesign from "react-native-vector-icons/AntDesign";
+AntDesign.loadFont()
 
 type Props = {
   visibleAlert: string;

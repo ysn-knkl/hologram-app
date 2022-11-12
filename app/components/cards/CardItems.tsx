@@ -3,6 +3,7 @@ import React from "react";
 import { Text, Card } from "@ui-kitten/components";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { ThemeContext } from "../../context/theme-context";
+MaterialCommunityIcons.loadFont()
 
 export type Product = {
   id: number;
