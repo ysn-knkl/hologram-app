@@ -8,7 +8,7 @@ import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 
 export interface AppContextInterface {
   user: FirebaseAuthTypes.User | null;
-  setUser: any
+  setUser: any;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -26,18 +26,14 @@ export const AuthProvider = ({ children }: any) => {
         setUser,
         login: async (email: string, password: string) => {
           try {
-            await auth()
-              .signInWithEmailAndPassword(email, password)
-              .then((te) => console.log(te, 123123));
+            await auth().signInWithEmailAndPassword(email, password);
           } catch (error) {
             console.log(error);
           }
         },
         register: async (email: string, password: string) => {
           try {
-            await auth()
-              .createUserWithEmailAndPassword(email, password)
-              .then((te) => console.log(te, 44444));
+            await auth().createUserWithEmailAndPassword(email, password);
           } catch (error) {
             console.log(error);
           }

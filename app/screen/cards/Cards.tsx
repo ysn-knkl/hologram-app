@@ -4,46 +4,31 @@ import { Button, Layout } from "@ui-kitten/components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CardItems from "../../components/cards/CardItems";
 import { addProduct, likeProduct } from "../../redux/features/cardSlice";
-import * as firebase from "../../firebase";
 import { Product } from "../../redux/models/modals";
-
+import { getService } from "../../api/getService";
 
 const Cards = () => {
   const { productList } = useAppSelector((state) => state.card);
   const dispatch = useAppDispatch();
 
-  const onClick = useCallback(
+  useEffect(() => {
+    if (productList.length === 0)
+      getService("products").then((data) => dispatch(addProduct(data)));
+  }, []);
+
+  const likeClick = useCallback(
     (id: number) => {
       dispatch(likeProduct(id));
     },
     [productList]
   );
 
-  useEffect(() => {
-    const db = firebase.firestore();
-    let unsubscribe: any = null;
-    if (productList.length === 0) {
-      unsubscribe = db.collection("products").onSnapshot((snapshot) => {
-        let newCardData: any[] = [];
-        snapshot.docs.map((doc, i) => {
-          const obj = {
-            id: i,
-            ...doc.data(),
-          };
-          newCardData.push(obj);
-        });
-        dispatch(addProduct(newCardData));
-      });
-    }
-    return () => unsubscribe && unsubscribe();
-  }, []);
-
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <Layout style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           {productList.map((item: Product, i: React.Key | null | undefined) => (
-            <CardItems item={item} key={`product-${i}`} onClick={onClick} />
+            <CardItems item={item} key={`product-${i}`} onClick={likeClick} />
           ))}
         </ScrollView>
       </Layout>

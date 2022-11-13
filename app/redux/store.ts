@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cardReducer from "./features/cardSlice";
 import barcodeReducer from "./features/barcodeSlice";
+import profileReducer from "./features/profileSlice";
+import chartReducer from "./features/chartSlice";
 
 export const store = configureStore({
   reducer: {
     card: cardReducer,
     barcode: barcodeReducer,
+    profile: profileReducer,
+    chart: chartReducer
   },
 });
 

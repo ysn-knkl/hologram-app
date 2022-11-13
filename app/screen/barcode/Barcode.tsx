@@ -79,10 +79,26 @@ const Barcode = (props: Props) => {
       if (isCameraAuthorized === true && isUserAuthorizedCamera === true) {
         setOpneScanner(true);
       } else {
-        console.log("CAMERA permission denied");
+        {
+          Dialog.show({
+            type: ALERT_TYPE.WARNING,
+            title: "ERROR",
+            textBody: "You Dont Have Camera Access Permission",
+            button: "ok",
+            closeOnOverlayTap: true,
+          });
+        }
       }
     } catch (error) {
-      console.log("CAMERA permission denied");
+      {
+        Dialog.show({
+          type: ALERT_TYPE.DANGER,
+          title: "ERROR",
+          textBody: "Something Wrong",
+          button: "ok",
+          closeOnOverlayTap: true,
+        });
+      }
     }
   }
 

@@ -1,15 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Product } from "../../components/cards/CardItems";
-import { RootState } from "../store";
 
-// Define a type for the slice state
 interface BarcodeState {
   barcodeList: string[];
 }
 
 // Define the initial state using that type
 const initialState: BarcodeState = {
- barcodeList:[]
+  barcodeList: [],
 };
 
 export const BarcodeSlice = createSlice({
@@ -17,8 +14,12 @@ export const BarcodeSlice = createSlice({
   initialState,
   reducers: {
     addBarcode: (state, action) => {
-      console.log(action.payload,222123)
-      state.barcodeList = [...state.barcodeList,action.payload];
+      state.barcodeList = [...state.barcodeList, action.payload];
+    },
+    deleteBarcode: (state, action) => {
+      state.barcodeList = [
+        ...state.barcodeList.filter((item) => item !== action.payload),
+      ];
     },
   },
 });

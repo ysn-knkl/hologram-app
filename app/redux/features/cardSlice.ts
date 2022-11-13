@@ -3,7 +3,9 @@ import { CardState, Product } from "../models/modals";
 
 // Define the initial state using that type
 const initialState: CardState = {
-  productList: [],
+ productList: [
+
+  ],
 };
 
 export const cardSlice = createSlice({
@@ -11,7 +13,6 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     likeProduct: (state, action) => {
-
       const unchangedItems = state.productList.filter(
         (item: Product) => item.id !== action.payload
       );

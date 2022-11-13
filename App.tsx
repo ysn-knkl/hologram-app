@@ -10,7 +10,6 @@ import { AuthProvider } from "./app/navigation/AuthProvider";
 import { firestore } from "./app/firebase";
 import '@react-native-firebase/app';
 
-
 type ThemeKey = "light" | "dark";
 
 const App: React.FC = () => {
