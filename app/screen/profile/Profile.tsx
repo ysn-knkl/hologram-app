@@ -14,7 +14,6 @@ import {
   AppContextInterface,
 } from "../../navigation/AuthProvider";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import CustomInput from "../../components/CustomInput";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import profileSlice, {
   ProfileState,
