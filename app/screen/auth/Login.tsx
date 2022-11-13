@@ -1,4 +1,4 @@
-import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useContext, useState } from "react";
 import { Button, Text, Input } from "@ui-kitten/components";
 import {

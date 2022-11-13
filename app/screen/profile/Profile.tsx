@@ -1,4 +1,4 @@
-import { Pressable, SafeAreaView, StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
@@ -15,10 +15,8 @@ import {
 } from "../../navigation/AuthProvider";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import profileSlice, {
-  ProfileState,
-  updateProfile,
-} from "../../redux/features/profileSlice";
+import { updateProfile } from "../../redux/features/profileSlice";
+import { IProfile } from "../../redux/models/modals";
 AntDesign.loadFont();
 
 const Profile = () => {
@@ -27,10 +25,7 @@ const Profile = () => {
   const { profile } = useAppSelector((state) => state.profile);
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState(true);
-  const [profileInformation, setProfileInformation] = useState<{
-    name: string;
-    surname: string;
-  }>({
+  const [profileInformation, setProfileInformation] = useState<IProfile>({
     name: "",
     surname: "",
   });

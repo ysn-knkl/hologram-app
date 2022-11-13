@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CardState, Product } from "../models/modals";
+import { ICardState, IProduct } from "../models/modals";
 
 // Define the initial state using that type
-const initialState: CardState = {
+const initialState: ICardState = {
  productList: [
 
   ],
@@ -14,10 +14,10 @@ export const cardSlice = createSlice({
   reducers: {
     likeProduct: (state, action) => {
       const unchangedItems = state.productList.filter(
-        (item: Product) => item.id !== action.payload
+        (item: IProduct) => item.id !== action.payload
       );
       const manupulatedItems = state.productList.find(
-        (item: Product) => item.id === action.payload
+        (item: IProduct) => item.id === action.payload
       );
       if (!manupulatedItems) return;
 

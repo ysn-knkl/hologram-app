@@ -3,18 +3,17 @@ import { NavigationContainer as ReactNavigationContainer } from "@react-navigati
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Charts from "../screen/charts/Charts";
 import Cards from "../screen/cards/Cards";
 import Barcode from "../screen/barcode/Barcode";
 import Profile from "../screen/profile/Profile";
 import TabbarIcon from "./components/TabBarIcon";
-import { ROUTES } from "../constant";
 import Login from "../screen/auth/Login";
 import SignUp from "../screen/auth/SignUp";
-import { AuthContext, AppContextInterface } from "./AuthProvider";
 import { auth } from "../firebase";
 import { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { Routes } from "../constant/routes";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,29 +37,29 @@ const TabNavigationContainer = () => {
         },
       })}
     >
-      <Tab.Screen name={ROUTES.CHARTS} component={Charts} />
-      <Tab.Screen name={ROUTES.CARDS} component={Cards} />
-      <Tab.Screen name={ROUTES.BARCODE} component={Barcode} />
-      <Tab.Screen name={ROUTES.PROFİLE} component={Profile} />
+      <Tab.Screen name={Routes.CHARTS} component={Charts} />
+      <Tab.Screen name={Routes.CARDS} component={Cards} />
+      <Tab.Screen name={Routes.BARCODE} component={Barcode} />
+      <Tab.Screen name={Routes.PROFİLE} component={Profile} />
     </Tab.Navigator>
   );
 };
 
 const NavigationContainer: React.FC = () => {
-  const [initializing, setInitializing] = useState(false);
-  const { user, setUser } = useContext(AuthContext) as AppContextInterface;
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const onAuthStateChanged = (user: FirebaseAuthTypes.User) => {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  };
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
+    auth().onAuthStateChanged(userState => {
+      setUser(userState);
+
+      if (loading) {
+        setLoading(false);
+      }
+    });
   }, []);
 
-  if (initializing) return null;
 
   return (
     <ReactNavigationContainer>

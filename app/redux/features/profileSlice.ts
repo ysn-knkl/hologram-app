@@ -1,14 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export interface ProfileState {
-  profile: {
-    name: string;
-    surname: string;
-  };
-}
+import { IProfileState } from "../models/modals";
 
 // Define the initial state using that type
-const initialState: ProfileState = {
+const initialState: IProfileState = {
   profile: {
     name: "test",
     surname: "TestSurname",
@@ -20,11 +14,16 @@ export const BarcodeSlice = createSlice({
   initialState,
   reducers: {
     addProfile: (state, action) => {
-      state.profile= {name:action.payload.name,surname:action.payload.surname}
+      state.profile = {
+        name: action.payload.name,
+        surname: action.payload.surname,
+      };
     },
     updateProfile: (state, action) => {
-      state.profile= {name:action.payload.name,surname:action.payload.surname}
-
+      state.profile = {
+        name: action.payload.name,
+        surname: action.payload.surname,
+      };
     },
   },
 });

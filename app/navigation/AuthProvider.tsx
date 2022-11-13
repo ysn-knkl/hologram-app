@@ -1,7 +1,5 @@
 import React, {
   createContext,
-  Dispatch,
-  SetStateAction,
   useState,
 } from "react";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";

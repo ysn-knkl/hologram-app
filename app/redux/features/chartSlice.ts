@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CardState, ChartState, Product } from "../models/modals";
+import { IChartState } from "../models/modals";
 
 // Define the initial state using that type
-const initialState: ChartState = {
-};
+const initialState: IChartState = {};
 
 export const chartSlice = createSlice({
   name: "chart",

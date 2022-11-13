@@ -1,7 +1,7 @@
 import { ParamListBase } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-export type Product = {
+export type IProduct = {
   id: number;
   name: string;
   image_url: string;
@@ -9,13 +9,13 @@ export type Product = {
   like: boolean;
 };
 
-export interface CardState {
-  productList: Product[];
+export interface ICardState {
+  productList: IProduct[];
 }
 
 export type ScreenProps = NativeStackScreenProps<ParamListBase>;
 
-export type Chart = {
+export type IChart = {
   name: string;
   population: number;
   color: string;
@@ -24,6 +24,14 @@ export type Chart = {
   id: number;
 };
 
-export interface ChartState {
-  chartList?: Chart[];
+export interface IChartState {
+  chartList?: IChart[];
+}
+
+export interface IProfile {
+  name: string;
+  surname: string;
+}
+export interface IProfileState {
+  profile: IProfile
 }

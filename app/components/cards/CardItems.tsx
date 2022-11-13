@@ -3,12 +3,12 @@ import React from "react";
 import { Text, Card } from "@ui-kitten/components";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { ThemeContext } from "../../context/theme-context";
-import { Product } from "../../redux/models/modals";
+import { IProduct } from "../../redux/models/modals";
 
 MaterialCommunityIcons.loadFont()
 
 type Props = {
-  item: Product;
+  item: IProduct;
   onClick: (id: number) => void;
 };
 

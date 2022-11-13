@@ -15,20 +15,18 @@ import {
   Button,
   Modal,
   Card,
-  styled,
 } from "@ui-kitten/components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addBarcode } from "../../redux/features/barcodeSlice";
-import { Camera, CameraType, CameraScreen } from "react-native-camera-kit";
+import { Camera, CameraType } from "react-native-camera-kit";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { ALERT_TYPE, Dialog, Toast } from "react-native-alert-notification";
-Ionicons.loadFont()
-AntDesign.loadFont()
+import { ALERT_TYPE, Dialog } from "react-native-alert-notification";
+Ionicons.loadFont();
+AntDesign.loadFont();
 
-type Props = {};
 
-const Barcode = (props: Props) => {
+const Barcode = () => {
   const [opneScanner, setOpneScanner] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -40,7 +38,7 @@ const Barcode = (props: Props) => {
     setOpneScanner(false);
   }, []);
 
-  async function requestCameraPermission() {
+  const requestCameraPermission = useCallback(async () => {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.CAMERA
@@ -67,9 +65,9 @@ const Barcode = (props: Props) => {
         });
       }
     }
-  }
+  }, []);
 
-  async function requestCameraPermissionIos() {
+  const requestCameraPermissionIos = useCallback(async () => {
     try {
       const isCameraAuthorized =
         await Camera.checkDeviceCameraAuthorizationStatus();
@@ -100,7 +98,7 @@ const Barcode = (props: Props) => {
         });
       }
     }
-  }
+  }, []);
 
   const onOpneScanner = useCallback(async () => {
     // To Start Scanning

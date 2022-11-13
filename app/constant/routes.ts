@@ -1,6 +1,6 @@
-export default{
-    CARDS:"cards",
-    CHARTS:"charts",
-    BARCODE:"barcode",
-    PROFİLE:"profile"
+export enum Routes {
+    CARDS="cards",
+    CHARTS="charts",
+    BARCODE="barcode",
+    PROFİLE="profile"
 }
