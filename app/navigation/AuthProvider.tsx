@@ -1,8 +1,4 @@
-import React, {
-  createContext,
-  Dispatch,
-  useState,
-} from "react";
+import React, { createContext, Dispatch, useState } from "react";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { ALERT_TYPE, Dialog } from "react-native-alert-notification";
 
@@ -13,10 +9,13 @@ export interface AppContextInterface {
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 }
-
+type Props = {
+  children: React.ReactNode;
+};
 export const AuthContext = createContext<AppContextInterface | null>(null);
 
-export const AuthProvider = ({ children }: any) => {
+export const AuthProvider = (props: Props) => {
+  const { children } = props;
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
 
   return (
@@ -26,14 +25,14 @@ export const AuthProvider = ({ children }: any) => {
         setUser,
         login: async (email: string, password: string) => {
           try {
-            await auth().signInWithEmailAndPassword(email, password)
+            await auth().signInWithEmailAndPassword(email, password);
           } catch (error) {
             Dialog.show({
               type: ALERT_TYPE.DANGER,
               title: "ERROR",
               button: "ok",
               closeOnOverlayTap: true,
-            })
+            });
           }
         },
         register: async (email: string, password: string) => {
@@ -45,7 +44,7 @@ export const AuthProvider = ({ children }: any) => {
               title: "ERROR",
               button: "ok",
               closeOnOverlayTap: true,
-            })
+            });
           }
         },
         logout: async () => {
@@ -57,7 +56,7 @@ export const AuthProvider = ({ children }: any) => {
               title: "ERROR",
               button: "ok",
               closeOnOverlayTap: true,
-            })
+            });
           }
         },
       }}

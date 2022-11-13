@@ -222,9 +222,7 @@ const Barcode = () => {
               torchOnImage={undefined}
               torchOffImage={undefined}
               torchImageStyle={{}}
-              onBottomButtonPressed={function (event: any): void {
-                throw new Error("Function not implemented.");
-              }}
+              onBottomButtonPressed={()=>{}}
             />
           </View>
         </Modal>
