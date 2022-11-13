@@ -7,7 +7,6 @@ import { store } from "./app/redux/store";
 import { Provider as ReduxProvider } from "react-redux";
 import { AlertNotificationRoot } from "react-native-alert-notification";
 import { AuthProvider } from "./app/navigation/AuthProvider";
-import { firestore } from "./app/firebase";
 import '@react-native-firebase/app';
 
 type ThemeKey = "light" | "dark";
