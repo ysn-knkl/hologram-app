@@ -1,83 +1,112 @@
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import React, { useContext, useState } from "react";
-import { Button, Text, Input } from "@ui-kitten/components";
+import { Button, Text, Input, Layout } from "@ui-kitten/components";
 import {
   AppContextInterface,
   AuthContext,
 } from "../../navigation/AuthProvider";
 import { ScreenProps } from "../../redux/models/modals";
+import { Routes } from "../../constant/routes";
+import { ALERT_TYPE, Dialog } from "react-native-alert-notification";
+import AntDesign from "react-native-vector-icons/AntDesign";
+AntDesign.loadFont();
 
 export default function Login(Props: ScreenProps) {
   const { navigation } = Props;
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [secureText, setSecureText] = useState(true);
 
   const { login } = useContext(AuthContext) as AppContextInterface;
 
   const onSignInPressed = () => {
+    if (email.length === 0 || password.length === 0) {
+      Dialog.show({
+        type: ALERT_TYPE.WARNING,
+        title: "ERROR",
+        textBody: "Please type the email and password",
+        button: "ok",
+        closeOnOverlayTap: true,
+      });
+    }
     login(email, password);
   };
 
-  return (
-    <View style={style.root}>
-      <View style={style.headerContainer}>
-        <Text style={style.title}>Welcome Hologram App</Text>
-        <Text style={style.subTitle}>Enjoy the App</Text>
-      </View>
-      <View style={style.inputContainer}>
-        <Input
-          placeholder="Email"
-          value={email}
-          onChangeText={(nextValue) => setEmail(nextValue)}
-        />
-        <Input
-          placeholder="Password"
-          value={password}
-          onChangeText={(nextValue) => setPassword(nextValue)}
-        />
+  const SecureTextIcon = () => {
+    return (
+      <Pressable onPress={() => setSecureText((prev) => !prev)}>
+        <AntDesign name={secureText ? "eyeo" : "eye"} size={15} />
+      </Pressable>
+    );
+  };
 
-        {/* <CustomInput
-          placeholder={"Email"}
-          label="E-mail"
-          value={name}
-          setValue={setName}
-          icon="mail"
-        />
-        <CustomInput
-          placeholder={"Password"}
-          label="Password"
-          value={password}
-          setValue={setPassword}
-          icon="lock1"
-          hide={true}
-        /> */}
-        <Button onPress={() => onSignInPressed()}>Sign In</Button>
-      </View>
-      <View style={style.footerContainer}>
-        <Text style={style.labelPrivacy}>
-          By signing up, you agree to the
-          <Text style={{ fontWeight: "bold" }}> Term of Service</Text> and
-          <Text style={{ fontWeight: "bold" }}> Privacy Policy</Text>
-        </Text>
-        <TouchableOpacity
-          style={style.loginButton}
-          onPress={() => navigation.navigate("SignUp")}
-        >
-          <Text style={style.loginButtonText}>
-            Don't have an account? Register
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+  return (
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <Layout style={styles.container}>
+        <View style={styles.root}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.title}>Welcome Hologram App</Text>
+            <Text style={styles.subTitle}>Enjoy the App</Text>
+          </View>
+          <View style={styles.inputContainer}>
+            <Input
+              placeholder="E-mail"
+              label="E-mail"
+              value={email}
+              onChangeText={(nextValue) => setEmail(nextValue)}
+            />
+            <Input
+              placeholder="Password"
+              label="Password"
+              value={password}
+              onChangeText={(nextValue) => setPassword(nextValue)}
+              secureTextEntry={secureText}
+              accessoryRight={SecureTextIcon}
+            />
+            <Button status="primary" onPress={() => onSignInPressed()}>
+              Sign In
+            </Button>
+          </View>
+          <View style={styles.footerContainer}>
+            <Text style={styles.labelPrivacy}>
+              By signing up, you agree to the
+              <Text style={styles.bold}> Term of Service</Text> and
+              <Text style={styles.bold}> Privacy Policy</Text>
+            </Text>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => navigation.navigate(Routes.SIGNUP)}
+            >
+              <Text style={styles.loginButtonText}>
+                Don't have an account? Register
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Layout>
+    </SafeAreaView>
   );
 }
 
-const style = StyleSheet.create({
-  root: {
+const styles = StyleSheet.create({
+  safeAreaContainer: {
     flex: 1,
     backgroundColor: "#ccc",
+  },
+  container: {
+    flex: 1,
     paddingHorizontal: 20,
+    backgroundColor: "#ccc",
+  },
+  root: {
+    flex: 1,
   },
   headerContainer: {
     flex: 1.5,
@@ -128,5 +157,8 @@ const style = StyleSheet.create({
   },
   loginButtonText: {
     color: "green",
+  },
+  bold: {
+    fontWeight: "bold",
   },
 });

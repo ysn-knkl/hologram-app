@@ -48,18 +48,21 @@ const TabNavigationContainer = () => {
 const NavigationContainer: React.FC = () => {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [initializing, setInitializing] = useState(false);
 
+
+  // Handle user state changes
+  function onAuthStateChanged(user:FirebaseAuthTypes.User | null) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
 
   useEffect(() => {
-    auth().onAuthStateChanged(userState => {
-      setUser(userState);
-
-      if (loading) {
-        setLoading(false);
-      }
-    });
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
   }, []);
 
+  if (initializing) return null;
 
   return (
     <ReactNavigationContainer>

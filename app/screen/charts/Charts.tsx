@@ -1,7 +1,7 @@
 import { Dimensions, SafeAreaView, StyleSheet } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart } from "react-native-chart-kit";
-import { Layout } from "@ui-kitten/components";
+import { Layout, Spinner } from "@ui-kitten/components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addChartList } from "../../redux/features/chartSlice";
 import { getService } from "../../api/getService";
@@ -13,17 +13,25 @@ const chartConfig = {
 
 const Charts = () => {
   const screenWidth = Dimensions.get("window").width;
+  const [loading, setLoading] = useState(false);
   const { chartList } = useAppSelector((state) => state.chart);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!chartList) getService("population").then((data) => dispatch(addChartList(data)));
+    if (!chartList) {
+      setLoading(true);
+      getService("population")
+        //Service'den gelen dataların redux'a setlenmesi
+        .then((data) => dispatch(addChartList(data)))
+        //Loading spinner gözükmesi için 500ms geciktirdim
+        .finally(() => setTimeout(() => setLoading(false), 500));
+    }
   }, []);
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <Layout style={styles.container}>
-        {chartList && (
+        {chartList && !loading && (
           <PieChart
             data={chartList}
             backgroundColor="transparent"
@@ -36,6 +44,7 @@ const Charts = () => {
             avoidFalseZero={false}
           />
         )}
+        {loading && <Spinner status="success" />}
       </Layout>
     </SafeAreaView>
   );

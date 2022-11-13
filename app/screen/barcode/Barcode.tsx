@@ -2,6 +2,7 @@ import {
   Dimensions,
   PermissionsAndroid,
   Platform,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -9,22 +10,15 @@ import {
   View,
 } from "react-native";
 import React, { useCallback, useState } from "react";
-import {
-  Text,
-  Layout,
-  Button,
-  Modal,
-  Card,
-} from "@ui-kitten/components";
+import { Text, Layout, Button, Modal, Card } from "@ui-kitten/components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { addBarcode } from "../../redux/features/barcodeSlice";
+import { addBarcode, deleteBarcode } from "../../redux/features/barcodeSlice";
 import { Camera, CameraType } from "react-native-camera-kit";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ALERT_TYPE, Dialog } from "react-native-alert-notification";
 Ionicons.loadFont();
 AntDesign.loadFont();
-
 
 const Barcode = () => {
   const [opneScanner, setOpneScanner] = useState(false);
@@ -33,11 +27,24 @@ const Barcode = () => {
 
   const { barcodeList } = useAppSelector((state) => state.barcode);
 
+  //Scan edilen barcode verilerinin redux'a setlenmesi
   const onBarcodeScan = useCallback((barcodeValue: string) => {
-    dispatch(addBarcode(barcodeValue));
+    if(!barcodeList.includes(barcodeValue)){
+      barcodeList.includes(barcodeValue.toString())
+      dispatch(addBarcode(barcodeValue));
+    }else{
+      Dialog.show({
+        type: ALERT_TYPE.WARNING,
+        title: "ERROR",
+        textBody: "This barcode already exist",
+        button: "ok",
+        closeOnOverlayTap: true,
+      });
+    }
     setOpneScanner(false);
-  }, []);
+  }, [barcodeList]);
 
+  //Android cihaz'dan izin talebi
   const requestCameraPermission = useCallback(async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -67,6 +74,7 @@ const Barcode = () => {
     }
   }, []);
 
+  //Ios cihaz'dan izin talebi
   const requestCameraPermissionIos = useCallback(async () => {
     try {
       const isCameraAuthorized =
@@ -144,11 +152,21 @@ const Barcode = () => {
                         {index + 1} - <Text>{barcodeItem}</Text>
                       </Text>
 
-                      <Ionicons
-                        style={styles.icon}
-                        name={"barcode-outline"}
-                        size={25}
-                      />
+                      <View style={{ flexDirection: "row", alignItems:"center" }}>
+                        <Ionicons
+                          style={styles.icon}
+                          name={"barcode-outline"}
+                          size={15}
+                        />
+                        <Pressable onPress={()=>dispatch(deleteBarcode(barcodeItem))}>
+                          <AntDesign
+                            style={styles.icon}
+                            name={"delete"}
+                            color="red"
+                            size={23}
+                          />
+                        </Pressable>
+                      </View>
                     </View>
                   </Card>
                 ))
@@ -158,7 +176,7 @@ const Barcode = () => {
                     name="infocirlceo"
                     size={20}
                     color="orange"
-                    style={styles.icon}
+                    style={styles.margingRight}
                   />
                   <Text>Dont have any barcode</Text>
                 </View>
@@ -252,7 +270,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   icon: {
-    marginRight: 10,
+    marginLeft: 5,
+  },
+  margingRight:{
+    marginRight:10
   },
   emptyList: {
     marginHorizontal: 20,

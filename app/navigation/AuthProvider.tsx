@@ -1,12 +1,14 @@
 import React, {
   createContext,
+  Dispatch,
   useState,
 } from "react";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { ALERT_TYPE, Dialog } from "react-native-alert-notification";
 
 export interface AppContextInterface {
   user: FirebaseAuthTypes.User | null;
-  setUser: any;
+  setUser: Dispatch<FirebaseAuthTypes.User | null>;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -24,23 +26,38 @@ export const AuthProvider = ({ children }: any) => {
         setUser,
         login: async (email: string, password: string) => {
           try {
-            await auth().signInWithEmailAndPassword(email, password);
+            await auth().signInWithEmailAndPassword(email, password)
           } catch (error) {
-            console.log(error);
+            Dialog.show({
+              type: ALERT_TYPE.DANGER,
+              title: "ERROR",
+              button: "ok",
+              closeOnOverlayTap: true,
+            })
           }
         },
         register: async (email: string, password: string) => {
           try {
             await auth().createUserWithEmailAndPassword(email, password);
           } catch (error) {
-            console.log(error);
+            Dialog.show({
+              type: ALERT_TYPE.DANGER,
+              title: "ERROR",
+              button: "ok",
+              closeOnOverlayTap: true,
+            })
           }
         },
         logout: async () => {
           try {
             await auth().signOut();
           } catch (error) {
-            console.log(error);
+            Dialog.show({
+              type: ALERT_TYPE.DANGER,
+              title: "ERROR",
+              button: "ok",
+              closeOnOverlayTap: true,
+            })
           }
         },
       }}

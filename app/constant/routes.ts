@@ -2,5 +2,7 @@ export enum Routes {
     CARDS="cards",
     CHARTS="charts",
     BARCODE="barcode",
-    PROFİLE="profile"
+    PROFİLE="profile",
+    LOGIN="Login",
+    SIGNUP="SignUp"
 }

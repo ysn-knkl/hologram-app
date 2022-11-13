@@ -21,7 +21,7 @@ AntDesign.loadFont();
 
 const Profile = () => {
   const themeContext = useContext(ThemeContext);
-  const { logout, user } = useContext(AuthContext) as AppContextInterface;
+  const { logout } = useContext(AuthContext) as AppContextInterface;
   const { profile } = useAppSelector((state) => state.profile);
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState(true);
@@ -31,6 +31,7 @@ const Profile = () => {
   });
 
   useEffect(() => {
+    //redux state'inin local state'e setlenmesi
     return setProfileInformation(profile);
   }, [profile]);
 
@@ -55,7 +56,7 @@ const Profile = () => {
             }}
           />
           <View>
-            <Text>Name</Text>
+            <Text category="h6">Name</Text>
             <Input
               style={styles.input}
               disabled={isEdit}
@@ -70,7 +71,7 @@ const Profile = () => {
             />
           </View>
           <View>
-            <Text>Surname</Text>
+            <Text category="h6">Surname</Text>
             <Input
               style={styles.input}
               disabled={isEdit}
@@ -84,14 +85,13 @@ const Profile = () => {
               }
             />
           </View>
-          <Button onPress={() => handleButton()}>
+          <Button status="primary" onPress={() => handleButton()}>
             {isEdit ? "Edit" : "Save"}
           </Button>
         </View>
         <View style={styles.spaceContainer} />
         <View style={styles.buttomContainer}>
-          <Text>{user?.email ? user?.email : ""}</Text>
-          <Button onPress={() => logout()}>Log out</Button>
+          <Button status="danger" onPress={() => logout()}>Log out</Button>
           <Toggle
             checked={themeContext.theme === "dark"}
             onChange={() => themeContext.toggleTheme()}

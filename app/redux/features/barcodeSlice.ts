@@ -25,6 +25,6 @@ export const BarcodeSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addBarcode } = BarcodeSlice.actions;
+export const { addBarcode,deleteBarcode } = BarcodeSlice.actions;
 
 export default BarcodeSlice.reducer;
